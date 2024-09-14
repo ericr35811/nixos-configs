@@ -1,0 +1,3 @@
+home-manager https://github.com/nix-community/home-manager/archive/master.tar.gz
+nixos https://nixos.org/channels/nixos-unstable
+plasma-manager https://github.com/nix-community/plasma-manager/archive/trunk.tar.gz
