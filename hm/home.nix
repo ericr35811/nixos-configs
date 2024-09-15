@@ -20,6 +20,22 @@
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
   home.stateVersion = "24.05"; # Please read the comment before changing.
+
+  # Customize konsole appearance
+  programs.plasma.konsole = {
+    profiles.Custom = {
+      name = "Custom";
+      colorScheme = "Custom";
+      #command = 
+      font = {
+        name = "Terminus";
+	size = 12;
+      };
+    };
+    customColorSchemes = ./konsole/Custom.profile;
+    defaultProfile = "Custom";
+  };
+ 
   
   # The home.packages option allows you to install Nix packages into your
   # environment.
