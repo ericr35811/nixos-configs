@@ -26,7 +26,7 @@
     ".local/share/konsole/Custom.colorscheme".source = ./konsole/Custom.colorscheme;
   };
 
-  plasma.configFile = {
+  programs.plasma.configFile = {
     konsolerc."Desktop Entry".DefaultProfile = "Custom.profile";
   };
 
