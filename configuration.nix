@@ -2,19 +2,23 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
+# General config file for all machines
+
 { config, lib, pkgs, ... }:
  
 {
   imports =
     [
-      ./hardware-configuration.nix
+      <home-manager/nixos>
+      # import the configuration specific to this machine
+      "${import ./nixdir.nix}/hardware-configuration.nix"
+      "${import ./nixdir.nix}/global.nix"
     ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos-test";
   networking.networkmanager.enable = true;
 
   time.timeZone = "America/New_York";
@@ -25,15 +29,6 @@
     font = "ter-v28b";
     keyMap = "us";
   #   useXkbConfig = true; # use xkb.options in tty.
-  };
-
-  # Enable the X11 windowing system.
-  services.xserver = {
-    enable = true;
-    desktopManager.plasma6.enable = true;
-    displayManager.sddm.enable = true;
-    displayManager.sddm.wayland.enable = true;
-    xkb.layout = "us";
   };
 
   # Configure keymap in X11
@@ -60,16 +55,19 @@
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   };
 
+  # Set up home-manager
+  home-manager.users.eric = import ./hm-eric/home.nix;
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     vim wget htop tmux git
   ];
   
-  users.users.eric.packages = with pkgs; [
-    firefox konsave
-    gcc gnumake cmake
-  ];
+  # users.users.eric.packages = with pkgs; [
+  #   firefox konsave
+  #   gcc gnumake cmake
+  # ];
   
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -82,8 +80,6 @@
 
   # List services that you want to enable:
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
