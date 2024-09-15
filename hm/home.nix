@@ -22,7 +22,7 @@
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
   # Customize konsole appearance
-  programs.plasma.konsole = {
+  programs.plasma.apps.konsole = {
     profiles.Custom = {
       name = "Custom";
       colorScheme = "Custom";
