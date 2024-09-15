@@ -56,7 +56,7 @@
   };
 
   # Set up home-manager
-  home-manager.users.eric = import ./hm-eric/home.nix;
+  home-manager.users.eric = import ./hm/home.nix;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
