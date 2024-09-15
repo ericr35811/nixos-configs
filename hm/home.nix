@@ -1,5 +1,5 @@
 let
-  HMDIR = "/etc/nixos/hm-eric";
+  HMDIR = "/etc/nixos/hm";
 in
 { config, pkgs, ... }:
 
@@ -114,7 +114,7 @@ in
     pkgs.bibata-cursors
     pkgs.whitesur-kde
     pkgs.kdePackages.qtstyleplugin-kvantum
-    (pkgs.kdePackages.callPackage /etc/nixos/hm-eric/derivations/LightlyShaders/default.nix {})
+    (pkgs.kdePackages.callPackage "${HMDIR}/derivations/LightlyShaders/default.nix" {})
 
     pkgs.firefox
 
