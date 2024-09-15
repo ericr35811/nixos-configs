@@ -1,6 +1,3 @@
-let
-  HMDIR = "/etc/nixos/hm";
-in
 { config, pkgs, ... }:
 
 {

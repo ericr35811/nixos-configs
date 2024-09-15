@@ -10,14 +10,14 @@
     bibata-cursors
     whitesur-kde
     kdePackages.qtstyleplugin-kvantum
-    (kdePackages.callPackage "${HMDIR}/derivations/LightlyShaders/default.nix" {})
+    (kdePackages.callPackage ./derivations/LightlyShaders/default.nix {})
   ];
   
   # Set the Kvantum theme
   xdg.configFile = {
-    "Kvantum/KvGlass/kvGlass.colors".source = "${HMDIR}/KvGlass/kvGlass.colors";
-    "Kvantum/KvGlass/KvGlass.kvconfig".source = "${HMDIR}/KvGlass/KvGlass.kvconfig";
-    "Kvantum/KvGlass/KvGlass.svg".source = "${HMDIR}/KvGlass/KvGlass.svg";
+    "Kvantum/KvGlass/kvGlass.colors".source = ./KvGlass/kvGlass.colors;
+    "Kvantum/KvGlass/KvGlass.kvconfig".source = ./KvGlass/KvGlass.kvconfig;
+    "Kvantum/KvGlass/KvGlass.svg".source = ./KvGlass/KvGlass.svg;
     "Kvantum/kvantum.kvconfig".text = "[General]\ntheme=KvGlass";
   };
 
