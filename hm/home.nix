@@ -5,7 +5,9 @@ in
 
 {
   imports = [ 
-    ./plasma.nix 
+    ./shortcuts.nix
+    ./plasma-theme.nix 
+    ./plasma-layout.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -22,101 +24,14 @@ in
   # release notes.
   home.stateVersion = "24.05"; # Please read the comment before changing.
   
-  xdg.configFile = {
-    "Kvantum/KvGlass/kvGlass.colors".source = "${HMDIR}/KvGlass/kvGlass.colors";
-    "Kvantum/KvGlass/KvGlass.kvconfig".source = "${HMDIR}/KvGlass/KvGlass.kvconfig";
-    "Kvantum/KvGlass/KvGlass.svg".source = "${HMDIR}/KvGlass/KvGlass.svg";
-    "Kvantum/kvantum.kvconfig".text = "[General]\ntheme=KvGlass";
-  };
-
-  home.file = {
-    ".local/share/applications/ClassicLogout.desktop".text = ''
-      [Desktop Entry]
-      Comment=
-      Exec=/run/current-system/sw/bin/qdbus org.kde.LogoutPrompt /LogoutPrompt promptAll
-      GenericName=Display the logout greeter with all options like KDE <6.1
-      Icon=system-log-out
-      Name=ClassicLogout
-      NoDisplay=false
-      Path=
-      StartupNotify=false
-      Terminal=false
-      TerminalOptions=
-      Type=Application
-      X-KDE-SubstituteUID=false
-      X-KDE-Username=
-    '';
-
-    ".local/share/applications/ScreenPortrait.desktop".text = ''
-      [Desktop Entry]
-      Comment=
-      Exec=/home/eric/Documents/screen.sh portrait
-      GenericName=Shortcut to rotate the secondary monitor
-      Icon=rotation-locked-portrait
-      Name=ScreenPortrait
-      NoDisplay=false
-      Path=
-      StartupNotify=false
-      Terminal=false
-      TerminalOptions=
-      Type=Application
-      X-KDE-SubstituteUID=false
-      X-KDE-Username=
-    '';
-    
-    ".local/share/applications/ScreenLandscape.desktop".text = ''
-      [Desktop Entry]
-      Comment=
-      Exec=/home/eric/Documents/screen.sh landscape
-      GenericName=Shortcut to rotate the secondary monitor
-      Icon=rotation-locked-landscape
-      Name=ScreenPortrait
-      NoDisplay=false
-      Path=
-      StartupNotify=false
-      Terminal=false
-      TerminalOptions=
-      Type=Application
-      X-KDE-SubstituteUID=false
-      X-KDE-Username=
-    '';
-    
-    ".scripts/screen.sh" = {
-      text = ''
-        #!/bin/bash
-
-        # shortcut to switch between landscape or portrait on second monitor
-        # get position and rotation values from kscreen-doctor -o
-        
-        PRIMARY="DP-2"
-        SECONDARY="DVI-D-1"
-        
-        case "$1" in
-        	"portrait")
-        		kscreen-doctor output.$SECONDARY.position.0,0   output.$SECONDARY.rotation.left   output.$PRIMARY.position.1080,159
-        		;;
-        	"landscape")
-        		kscreen-doctor output.$SECONDARY.position.0,266 output.$SECONDARY.rotation.normal output.$PRIMARY.position.1920,0
-        		;;
-        esac
-      '';
-      executable = true;
-    };
-  };
-
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = [
+  home.packages = with pkgs; [
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
 
-    pkgs.bibata-cursors
-    pkgs.whitesur-kde
-    pkgs.kdePackages.qtstyleplugin-kvantum
-    (pkgs.kdePackages.callPackage "${HMDIR}/derivations/LightlyShaders/default.nix" {})
-
-    pkgs.firefox
+    firefox
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -169,4 +84,5 @@ in
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+  programs.plasma.enable = true;
 }
