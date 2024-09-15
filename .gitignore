@@ -1,2 +1,3 @@
 nixdir.nix
 *.swp
+*result

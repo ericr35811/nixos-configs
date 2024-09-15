@@ -26,7 +26,7 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   console = {
-    font = "ter-v28b";
+    font = "/run/current-system/sw/share/consolefonts/ter-v14n.psf.gz";
     keyMap = "us";
   #   useXkbConfig = true; # use xkb.options in tty.
   };
@@ -61,7 +61,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim wget htop tmux git
+    vim wget htop tmux git terminus_font
   ];
   
   # users.users.eric.packages = with pkgs; [
