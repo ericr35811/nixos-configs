@@ -6,24 +6,37 @@
 #   cmake ? pkgs.cmake
 # }:
 
-{
-  pkgs, lib, stdenv, fetchFromGitHub,
-}:
-stdenv.mkDerivation rec {
-  pname = "latte-spacer";
+{ pkgs ? import <nixpkgs> {} }:
+pkgs.stdenv.mkDerivation {
+  pname = "latte-separator";
   version = "v0.1.2";
 
-  src = fetchFromGitHub {
+  src = pkgs.fetchFromGitHub {
     owner = "psifidotos";
-    repo = "applet-latte-spacer";
+    repo = "applet-latte-separator";
     rev = "v0.1.2";
-    sha256 = "";
+    sha256 = "sha256-wguheygXvLpeKmi92tnuj1Xe+JdcR3ZJL0Ihv59Zj18=";
   };
 
-  buildPhase = "";
+  nativeBuildInputs = [ 
+    pkgs.libsForQt5.kservice
+    pkgs.libsForQt5.wrapQtAppsHook
+  ];
+  
+  buildPhase = ''
+    desktoptojson -i metadata.desktop -o metadata.json
+    rm metadata.desktop
+  '';
+
 
   installPhase = ''
-    kpackagetool6 -i applet-latte-spacer/
+    pkgpath=$out/share/plasma/plasmoids/org.kde.latte.separator
+    mkdir -p $pkgpath
+    cp -r * $pkgpath/
+  '';
+
+  fixupPhase = ''
+    echo no fixup required
   '';
 }
 

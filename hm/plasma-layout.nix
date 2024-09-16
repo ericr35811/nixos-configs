@@ -32,6 +32,9 @@ in
 { pkgs, ... }:
 
 {
+  home.packages = with pkgs; [
+    (kdePackages.callPackage ./derivations/latte-separator/default.nix {})
+  ];
   programs.plasma = {
     panels = [
       {
