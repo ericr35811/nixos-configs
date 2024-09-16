@@ -1,0 +1,52 @@
+boot into nixos minimal installer
+
+# become root
+sudo -s
+
+# create partitions
+fdisk /dev/sda
+    n 1 _ +512M  # ESP
+    n 2 _ +4G    # swap
+    n 3 _ +100G  # root
+    t 1 uefi
+    t 2 swap
+    w
+
+# format partitions
+mkfs.fat -F 32 -n ESP /dev/sda1
+mkswap -L swap /dev/sda2
+mkfs.ext4 -L nixos /dev/sda3
+
+# turn on swap
+swapon /dev/sda2
+
+# prepare the root partition
+mount /dev/sda3 /mnt
+mkdir -p /mnt/boot /mnt/etc
+mount -o umask=077 /dev/sda1 /mnt/boot
+
+# install git and fetch configs from github
+nix-env -iA nixos.git
+git clone https://github.com/ericr35811/nixos-configs /mnt/etc/nixos
+
+# generate hardware-configuration.nix. configuration.nix will not be
+# touched because it exists already
+nixos-generate-config --root /mnt
+
+# choose the config directory for this machine
+echo ./<machine name> > /mnt/etc/nixos/nixdir.nix
+
+# add required nix channels
+nix-channel --add https://nixos.org/channels/nixos-unstable nixos  # overrides the default release channel
+nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+nix-channel --add https://github.com/nix-community/plasma-manager/archive/trunk.tar.gz plasma-manager
+nix-channel --update
+
+# start the installation
+nixos-install
+
+# set password for a normal user in the installed system
+# -R (--root) basically chroots the passwd command
+passwd -R /mnt eric
+
+reboot
