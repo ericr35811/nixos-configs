@@ -32,10 +32,6 @@ in
 { pkgs, ... }:
 
 {
-  imports = [
-    <plasma-manager/modules>
-  ];
-
   programs.plasma = {
     panels = [
       {

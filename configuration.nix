@@ -3,13 +3,15 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 # General config file for all machines
-
+let
+  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
+in 
 { config, lib, pkgs, ... }:
  
 {
   imports =
     [
-      <home-manager/nixos>
+      (import "${home-manager}/nixos")
       ./hardware-configuration.nix
       # import the configuration specific to this machine
       "${import ./nixdir.nix}/global.nix"

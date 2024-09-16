@@ -1,7 +1,9 @@
-{ config, pkgs, ... }:
-
-{
+let 
+  plasma-manager = builtins.fetchTarball "https://github.com/nix-community/plasma-manager/archive/trunk.tar.gz";
+in
+{ config, pkgs, ... }: {
   imports = [ 
+    (import "${plasma-manager}/modules")
     ./shortcuts.nix
     ./plasma-theme.nix 
     ./plasma-layout.nix
