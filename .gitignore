@@ -1,3 +1,4 @@
 nixdir.nix
+*hardware-configuration.nix
 *.swp
 *result
