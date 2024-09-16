@@ -34,6 +34,7 @@ in
 {
   home.packages = with pkgs; [
     (kdePackages.callPackage ./derivations/latte-separator/default.nix {})
+    (kdePackages.callPackage ./derivations/panel-spacer-extended/default.nix {})
   ];
   programs.plasma = {
     panels = [

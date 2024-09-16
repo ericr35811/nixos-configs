@@ -9,25 +9,28 @@
 { pkgs ? import <nixpkgs> {} }:
 pkgs.stdenv.mkDerivation {
   pname = "latte-separator";
-  version = "v0.1.2";
+  version = "9999";
 
   src = pkgs.fetchFromGitHub {
-    owner = "psifidotos";
+    owner = "doncsugar";
     repo = "applet-latte-separator";
-    rev = "v0.1.2";
-    sha256 = "sha256-wguheygXvLpeKmi92tnuj1Xe+JdcR3ZJL0Ihv59Zj18=";
+    rev = "0340401";
+    sha256 = "sha256-nKPHL03w49xkuCDQUEpcRr2bo7V+o6s28yruIz3RRhQ=";
   };
 
-  nativeBuildInputs = [ 
-    pkgs.libsForQt5.kservice
-    pkgs.libsForQt5.wrapQtAppsHook
-  ];
+  #nativeBuildInputs = [ 
+  #  pkgs.libsForQt5.kservice
+  #  pkgs.libsForQt5.wrapQtAppsHook
+  #];
   
-  buildPhase = ''
-    desktoptojson -i metadata.desktop -o metadata.json
-    rm metadata.desktop
-  '';
+  #buildPhase = ''
+  #  desktoptojson -i metadata.desktop -o metadata.json
+  #  rm metadata.desktop
+  #'';
 
+  buildPhase = ''
+    echo no build required
+  '';
 
   installPhase = ''
     pkgpath=$out/share/plasma/plasmoids/org.kde.latte.separator
