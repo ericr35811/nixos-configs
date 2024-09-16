@@ -1,10 +1,6 @@
 { pkgs, ... }:
 
 {
-  imports = [
-    <plasma-manager/modules>
-  ];
-
   # Required packages for the theming
   home.packages = with pkgs; [
     bibata-cursors
