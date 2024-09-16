@@ -10,8 +10,8 @@
   imports =
     [
       <home-manager/nixos>
+      ./hardware-configuration.nix
       # import the configuration specific to this machine
-      "${import ./nixdir.nix}/hardware-configuration.nix"
       "${import ./nixdir.nix}/global.nix"
     ];
 
