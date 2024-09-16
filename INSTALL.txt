@@ -38,8 +38,8 @@ echo ./<machine name> > /mnt/etc/nixos/nixdir.nix
 
 # add required nix channels
 nix-channel --add https://nixos.org/channels/nixos-unstable nixos  # overrides the default release channel
-nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
-nix-channel --add https://github.com/nix-community/plasma-manager/archive/trunk.tar.gz plasma-manager
+#nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+#nix-channel --add https://github.com/nix-community/plasma-manager/archive/trunk.tar.gz plasma-manager
 nix-channel --update
 
 # start the installation
