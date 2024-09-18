@@ -46,9 +46,6 @@
       };
     };
 
-    programs.plasma.configFile = {
-
-
     configFile = {
       # equivalent to Application Style
       kdeglobals.KDE.widgetStyle = "kvantum";
