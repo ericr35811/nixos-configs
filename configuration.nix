@@ -27,6 +27,12 @@ in
       enable = true;
       efiSupport = true;
       device = "nodev";
+      extraEntries = ''
+        menuentry 'NixOS 2' {
+          search --set=root --fs-uuid 019878e2-474c-4b89-bf12-9a2c7a82daaa
+          configfile '/boot/grub/grub.cfg'
+        }
+      '';
     };
     efi.canTouchEfiVariables = true;
   };
