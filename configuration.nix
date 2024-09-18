@@ -28,7 +28,7 @@ in
       efiSupport = true;
       device = "nodev";
     };
-    efi.canTouchEfiVariables = true;
+    efi.canTouchEfiVariables = false;
   };
   
   networking.networkmanager.enable = true;
@@ -43,6 +43,21 @@ in
   #   useXkbConfig = true; # use xkb.options in tty.
   };
 
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.users.eric = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+  };
+
+  # Set up home-manager
+  home-manager.users.eric = import ./hm/home.nix;
+
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
+  environment.systemPackages = with pkgs; [
+    vim wget htop tmux git terminus_font
+  ];
+  
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
@@ -61,21 +76,6 @@ in
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.eric = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-  };
-
-  # Set up home-manager
-  home-manager.users.eric = import ./hm/home.nix;
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    vim wget htop tmux git terminus_font
-  ];
-  
   # users.users.eric.packages = with pkgs; [
   #   firefox konsave
   #   gcc gnumake cmake
