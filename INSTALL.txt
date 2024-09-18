@@ -5,16 +5,16 @@ sudo -s
 
 # create partitions
 fdisk /dev/sda
-    n 1 _ +512M  # ESP
-    n 2 _ +4G    # swap
+#    n 1 _ +512M  # ESP
+#    n 2 _ +4G    # swap
     n 3 _ +100G  # root
-    t 1 uefi
-    t 2 swap
+#    t 1 uefi
+#    t 2 swap
     w
 
 # format partitions
-mkfs.fat -F 32 -n ESP /dev/sda1
-mkswap -L swap /dev/sda2
+#mkfs.fat -F 32 -n ESP /dev/sda1
+#mkswap -L swap /dev/sda2
 mkfs.ext4 -L nixos /dev/sda3
 
 # turn on swap
@@ -22,8 +22,9 @@ swapon /dev/sda2
 
 # prepare the root partition
 mount /dev/sda3 /mnt
-mkdir -p /mnt/boot /mnt/etc
-mount -o umask=077 /dev/sda1 /mnt/boot
+#mkdir -p /mnt/boot /mnt/etc
+mkdir -p /mnt/etc
+#mount -o umask=077 /dev/sda1 /mnt/boot
 
 # install git and fetch configs from github
 nix-env -iA nixos.git

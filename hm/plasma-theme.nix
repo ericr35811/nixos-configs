@@ -8,6 +8,12 @@
     kdePackages.qtstyleplugin-kvantum
     (kdePackages.callPackage ./derivations/LightlyShaders/default.nix {})
   ];
+
+  # Konsole theme files
+  home.file = {
+    ".local/share/konsole/Custom.profile".source = ./konsole/Custom.profile;
+    ".local/share/konsole/Custom.colorscheme".source = ./konsole/Custom.colorscheme;
+  };
   
   # Set the Kvantum theme
   xdg.configFile = {
@@ -40,9 +46,15 @@
       };
     };
 
+    programs.plasma.configFile = {
+
+
     configFile = {
       # equivalent to Application Style
       kdeglobals.KDE.widgetStyle = "kvantum";
+
+      # Set konsole theme
+      konsolerc."Desktop Entry".DefaultProfile = "Custom.profile";
       
       kwinrc = {
         Plugins = {

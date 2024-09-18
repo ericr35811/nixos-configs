@@ -23,14 +23,7 @@ in
   # release notes.
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
-  home.file = {
-    ".local/share/konsole/Custom.profile".source = ./konsole/Custom.profile;
-    ".local/share/konsole/Custom.colorscheme".source = ./konsole/Custom.colorscheme;
-  };
 
-  programs.plasma.configFile = {
-    konsolerc."Desktop Entry".DefaultProfile = "Custom.profile";
-  };
 
   # The home.packages option allows you to install Nix packages into your
   # environment.

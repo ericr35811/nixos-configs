@@ -25,6 +25,7 @@ in
     systemd-boot.enable = false;
     grub = {
       enable = true;
+      # don't install bootloader, just generate a grub.cfg
       efiSupport = false;
       device = "nodev";
     };
